@@ -69,4 +69,11 @@ public class Order extends BaseAuditor{
         if (this.status != OrderStatus.GROUP_BUYING_INIT) throw new RuntimeException();
         this.status = OrderStatus.SHIPPING_READY;
     }
+
+    public void addShippingCode(String shippingCode) {
+        if (this.status != OrderStatus.SHIPPING_READY) throw new IllegalArgumentException("잘못된 요청입니다.");
+        if (this.shippingCode != null) throw new IllegalArgumentException("이미 입력된 배송지 입니다.");
+        this.shippingCode = shippingCode;
+        this.status = OrderStatus.SHIPPING;
+    }
 }

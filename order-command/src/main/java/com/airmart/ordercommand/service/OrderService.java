@@ -29,4 +29,11 @@ public class OrderService {
     groupOrder.checkGroupOrderSuccess();
     return groupOrder;
   }
+
+  public void updateShippingCode(String orderId, String shippingCode) {
+    //Todo: CustomException 으로 변경 필요
+    Order findOrder = orderStore.findByOrderId(orderId)
+        .orElseThrow(() -> new RuntimeException("해당 주문을 찾을 수 없습니다."));
+    findOrder.addShippingCode(shippingCode);
+  }
 }
