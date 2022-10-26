@@ -6,6 +6,7 @@ import com.airmart.ordercommand.common.dto.CommonResponse;
 import com.airmart.ordercommand.dto.response.OrderResponseDto.GroupOrderCreateResponse;
 import com.airmart.ordercommand.dto.response.OrderResponseDto.OrderCreateResponse;
 import com.airmart.ordercommand.service.OrderFacade;
+import javax.servlet.annotation.HttpConstraint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +46,7 @@ public class OrderCommandController {
      * 이미 존재하는 Group Order 에 참여하기 위한 API
      * @param groupOrderId
      * @param request
-     * @return
+     * @return CommonResponse<OrderCreateResponse>
      */
     @PostMapping("/{groupOrderId}")
     @ResponseStatus(HttpStatus.CREATED)
@@ -55,6 +56,22 @@ public class OrderCommandController {
     ) {
         return CommonResponse.success(
             orderFacade.createOrder(groupOrderId, request)
+        );
+    }
+
+    /**
+     * Order에 - Shipping 등록
+     * @param orderId
+     * @param request
+     * @return
+     */
+    @PostMapping("/{orderId}/shipping-register")
+    public CommonResponse registerShipping(
+        @PathVariable String orderId,
+        @RequestBody ShippingRegisterRequest request
+        ) {
+        return CommonResponse.success(
+            orderFacade.shippingRegister(orderId, request);
         );
     }
 }
