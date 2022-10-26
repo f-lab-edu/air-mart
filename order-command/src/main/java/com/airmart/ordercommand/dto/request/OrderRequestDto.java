@@ -3,6 +3,7 @@ package com.airmart.ordercommand.dto.request;
 import com.airmart.ordercommand.domain.GroupOrder;
 import com.airmart.ordercommand.domain.Order;
 import com.airmart.ordercommand.domain.OrderType;
+import com.airmart.ordercommand.domain.embed.Address;
 import com.airmart.ordercommand.domain.embed.OrderedItem;
 import com.airmart.ordercommand.domain.embed.RecipientInfo;
 import com.airmart.ordercommand.domain.embed.SenderInfo;
@@ -93,6 +94,25 @@ public class OrderRequestDto {
       return RecipientInfo.newInstance(recipientName, recipientPhoneNumber
           , firstAddress, secondAddress, zipCode);
     }
+  }
+
+
+  /**
+   * 송장 번호 입력을 위한 API 요청에 사용될 DTO
+   */
+  @Data
+  public static class ShippingRegisterRequest {
+    private String shippingCode;
+    private AddressRequest address;
+    private String shippingRequests;
+  }
+
+  @Data
+  public static class AddressRequest {
+    private String firstAddress;
+    private String secondAddress;
+    private String zipCode;
+
   }
 
 }

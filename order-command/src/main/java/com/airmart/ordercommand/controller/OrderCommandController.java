@@ -71,7 +71,7 @@ public class OrderCommandController {
         @RequestBody ShippingRegisterRequest request
         ) {
         return CommonResponse.success(
-            orderFacade.shippingRegister(orderId, request);
+            orderFacade.registerShipping(orderId, request)
         );
     }
 }
