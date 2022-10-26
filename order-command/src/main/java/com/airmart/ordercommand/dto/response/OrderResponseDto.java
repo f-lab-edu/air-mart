@@ -1,6 +1,7 @@
 package com.airmart.ordercommand.dto.response;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 public class OrderResponseDto {
@@ -13,6 +14,11 @@ public class OrderResponseDto {
   @Data
   public static class GroupOrderCreateResponse {
 
+  }
+
+  @Data @AllArgsConstructor
+  public static class RegisterShippingResponse {
+    private String shippingCode;
   }
 
 

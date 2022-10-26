@@ -3,6 +3,7 @@ package com.airmart.ordercommand.dto.request;
 import com.airmart.ordercommand.domain.GroupOrder;
 import com.airmart.ordercommand.domain.Order;
 import com.airmart.ordercommand.domain.OrderType;
+import com.airmart.ordercommand.domain.Shipping;
 import com.airmart.ordercommand.domain.embed.Address;
 import com.airmart.ordercommand.domain.embed.OrderedItem;
 import com.airmart.ordercommand.domain.embed.RecipientInfo;
@@ -105,6 +106,14 @@ public class OrderRequestDto {
     private String shippingCode;
     private AddressRequest address;
     private String shippingRequests;
+
+    public Shipping toEntity() {
+      return Shipping.builder()
+          .shippingCode(shippingCode)
+          .address(address.toVO())
+          .shippingRequests(shippingRequests)
+          .build();
+    }
   }
 
   @Data
@@ -113,6 +122,9 @@ public class OrderRequestDto {
     private String secondAddress;
     private String zipCode;
 
+    public Address toVO() {
+      return Address.newInstance(this.firstAddress, this.secondAddress, this.zipCode);
+    }
   }
 
 }
